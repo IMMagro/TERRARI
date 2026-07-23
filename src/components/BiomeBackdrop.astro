@@ -1,0 +1,84 @@
+---
+import { Image } from 'astro:assets';
+import tropicale from '../assets/biomi/biome-tropicale.webp';
+import deserto from '../assets/biomi/biome-deserto.webp';
+import palude from '../assets/biomi/biome-palude.webp';
+
+// Tre "portali di bioma" che ciclano in crossfade con un lento zoom (Ken Burns).
+const slides = [tropicale, deserto, palude];
+---
+
+<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-bg-deep" aria-hidden="true">
+  {slides.map((img, i) => (
+    <Image
+      src={img}
+      alt=""
+      widths={[800, 1280, 1600]}
+      sizes="100vw"
+      class:list={['biome-slide absolute inset-0 h-full w-full object-cover', `biome-slide-${i + 1}`]}
+    />
+  ))}
+
+  {/* Scrim: scuro a sinistra (testo leggibile), scena visibile verso il centro/destra */}
+  <div
+    class="absolute inset-0"
+    style="background: linear-gradient(90deg, #0b0f12 0%, rgba(11,15,18,0.88) 30%, rgba(11,15,18,0.44) 62%, rgba(11,15,18,0.72) 100%);"
+  >
+  </div>
+  <div
+    class="absolute inset-0"
+    style="background: linear-gradient(180deg, rgba(11,15,18,0.45) 0%, transparent 24%, rgba(11,15,18,0.62) 100%);"
+  >
+  </div>
+</div>
+
+<style>
+  .biome-slide {
+    opacity: 0;
+    animation: biomeCycle 24s linear infinite;
+    will-change: opacity, transform;
+  }
+  .biome-slide-1 {
+    animation-delay: 0s;
+  }
+  .biome-slide-2 {
+    animation-delay: -8s;
+  }
+  .biome-slide-3 {
+    animation-delay: -16s;
+  }
+  @keyframes biomeCycle {
+    0% {
+      opacity: 0;
+      transform: scale(1.04);
+    }
+    5% {
+      opacity: 1;
+    }
+    38% {
+      opacity: 1;
+    }
+    43% {
+      opacity: 0;
+      transform: scale(1.13);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.13);
+    }
+  }
+  /* Reduced-motion: niente ciclo, mostra solo il primo bioma */
+  @media (prefers-reduced-motion: reduce) {
+    .biome-slide {
+      animation: none;
+      transform: none;
+    }
+    .biome-slide-1 {
+      opacity: 1;
+    }
+    .biome-slide-2,
+    .biome-slide-3 {
+      opacity: 0;
+    }
+  }
+</style>

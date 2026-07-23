@@ -1,0 +1,21 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  intro?: string;
+  accent?: 'tropic' | 'arid';
+}
+const { eyebrow, title, intro, accent = 'tropic' } = Astro.props;
+const accentVar =
+  accent === 'arid' ? 'var(--color-arid-bright)' : 'var(--color-tropic-bright)';
+---
+
+<section class="atmosphere border-b border-line/50">
+  <div class="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
+    <p class="eyebrow" style={`color:${accentVar}`}>{eyebrow}</p>
+    <h1 class="mt-3 max-w-3xl font-display text-5xl font-semibold text-ink sm:text-6xl">
+      {title}
+    </h1>
+    {intro && <p class="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">{intro}</p>}
+  </div>
+</section>

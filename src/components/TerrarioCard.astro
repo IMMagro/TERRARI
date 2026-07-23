@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { resolveTerrarioImage } from '../lib/images';
+import { biomeLabel } from '../lib/biomi';
+
+interface Props {
+  terrario: CollectionEntry<'terrari'>;
+  href?: string;
+}
+
+const { terrario, href = '/galleria' } = Astro.props;
+const d = terrario.data;
+const cover = resolveTerrarioImage(d.coverImage);
+---
+
+<a
+  href={href}
+  data-biome={d.biome}
+  class="group glass block overflow-hidden rounded-2xl transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-[color-mix(in_oklab,var(--accent)_45%,transparent)]"
+>
+  <div class="relative aspect-[4/3] overflow-hidden">
+    {cover ? (
+      <Image
+        src={cover}
+        alt={`${d.title} — terrario ${biomeLabel(d.biome)}`}
+        widths={[400, 640, 860]}
+        sizes="(max-width: 640px) 92vw, 360px"
+        class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+      />
+    ) : (
+      <div class="img-placeholder h-full w-full"></div>
+    )}
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+    <span
+      class="eyebrow absolute left-4 top-4 rounded-full px-2.5 py-1 text-[0.62rem] text-white"
+      style="background: color-mix(in oklab, var(--accent) 30%, rgba(0,0,0,0.5)); backdrop-filter: blur(4px);"
+    >
+      {d.status}
+    </span>
+  </div>
+
+  <div class="p-5">
+    <p class="eyebrow" style="color: var(--accent-bright);">{biomeLabel(d.biome)}</p>
+    <h3 class="mt-1.5 font-display text-2xl font-semibold text-ink">{d.title}</h3>
+    <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">{d.tagline}</p>
+
+    <div class="hairline my-4"></div>
+
+    <dl class="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+      <div>
+        <dt class="text-ink-mute">Dimensioni</dt>
+        <dd class="spec-value text-ink-soft">{d.specs.dimensions}</dd>
+      </div>
+      <div>
+        <dt class="text-ink-mute">Manutenzione</dt>
+        <dd class="spec-value text-ink-soft">{d.specs.maintenanceLevel}</dd>
+      </div>
+    </dl>
+  </div>
+</a>

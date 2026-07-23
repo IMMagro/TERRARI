@@ -1,0 +1,54 @@
+---
+const year = new Date().getFullYear();
+const cols = [
+  {
+    title: 'Esplora',
+    links: [
+      { href: '/galleria', label: 'Galleria' },
+      { href: '/custom', label: 'Progetto su misura' },
+      { href: '/guida-cura', label: 'Guida alla cura' },
+    ],
+  },
+  {
+    title: 'Studio',
+    links: [
+      { href: '/contatti', label: 'Contatti' },
+      { href: '/custom', label: 'Richiedi un preventivo' },
+    ],
+  },
+];
+---
+
+<footer class="atmosphere border-t border-line/60">
+  <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div>
+      <p class="font-display text-2xl font-semibold text-ink">Terrari</p>
+      <p class="mt-3 max-w-xs text-sm leading-relaxed text-ink-soft">
+        Ecosistemi viventi costruiti a mano, sotto vetro. Ogni terrario è un
+        microclima progettato per durare.
+      </p>
+    </div>
+
+    {cols.map((col) => (
+      <div>
+        <p class="eyebrow mb-4">{col.title}</p>
+        <ul class="flex flex-col gap-2.5">
+          {col.links.map((l) => (
+            <li>
+              <a href={l.href} class="text-sm text-ink-soft transition-colors hover:text-ink">
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <div class="border-t border-line/40">
+    <div class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-2 px-5 py-6 text-xs text-ink-mute sm:flex-row sm:items-center sm:px-8">
+      <p>© {year} Terrari · Ecosistemi su misura</p>
+      <p class="font-mono tracking-wider">Progettato in penombra, con umidità controllata.</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,130 @@
+import { useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+
+interface Half {
+  src: string;
+  srcset: string;
+  biome: 'tropical' | 'desert';
+  eyebrow: string;
+  title: string;
+  line: string;
+  cta: string;
+  href: string;
+  objectPosition?: string;
+}
+
+interface Props {
+  sizes: string;
+  tropical: Half;
+  desert: Half;
+  headline: { eyebrow: string; title: string; subtitle: string };
+}
+
+const spring = { type: 'spring', stiffness: 150, damping: 22, mass: 0.9 } as const;
+
+export default function SplitHero({ sizes, tropical, desert, headline }: Props) {
+  const [hovered, setHovered] = useState<0 | 1 | null>(null);
+  const reduce = useReducedMotion();
+
+  const halves: Half[] = [tropical, desert];
+  const growFor = (i: 0 | 1) =>
+    reduce || hovered === null ? 1 : hovered === i ? 1.32 : 0.68;
+  const seamLeft =
+    reduce || hovered === null ? '50%' : hovered === 0 ? '66%' : '34%';
+
+  return (
+    <section
+      aria-label="I due biomi: tropicale e desertico"
+      className="relative isolate w-full overflow-hidden bg-bg-deep"
+    >
+      <div className="flex w-full flex-col md:h-[92svh] md:min-h-[560px] md:flex-row">
+        {halves.map((h, idx) => {
+          const i = idx as 0 | 1;
+          return (
+            <motion.a
+              key={h.biome}
+              href={h.href}
+              data-biome={h.biome}
+              aria-label={`${h.title}: ${h.cta}`}
+              className="group relative block h-[50svh] w-full overflow-hidden outline-offset-[-3px] md:h-full md:w-auto md:flex-1"
+              style={{ flexGrow: 1 }}
+              initial={false}
+              animate={{ flexGrow: growFor(i) }}
+              transition={spring}
+              onHoverStart={() => setHovered(i)}
+              onHoverEnd={() => setHovered(null)}
+              onFocus={() => setHovered(i)}
+              onBlur={() => setHovered(null)}
+            >
+              <img
+                src={h.src}
+                srcSet={h.srcset}
+                sizes={sizes}
+                alt=""
+                aria-hidden="true"
+                draggable={false}
+                className="absolute inset-0 h-full w-full scale-105 object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-105"
+                style={{ objectPosition: h.objectPosition ?? 'center' }}
+              />
+              {/* scrim per leggibilità del testo in basso */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/5" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/25 to-transparent" />
+
+              <div className="absolute inset-x-0 bottom-0 p-7 sm:p-10">
+                <p className="eyebrow mb-2" style={{ color: 'var(--accent-bright)' }}>
+                  {h.eyebrow}
+                </p>
+                <h2 className="font-display text-4xl font-semibold text-white sm:text-5xl">
+                  {h.title}
+                </h2>
+                <p className="mt-2 max-w-xs text-sm text-white/80">{h.line}</p>
+                <span
+                  className="mt-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-transform duration-300 group-hover:gap-3"
+                  style={{
+                    borderColor: 'color-mix(in oklab, var(--accent) 55%, transparent)',
+                    background: 'color-mix(in oklab, var(--accent) 20%, transparent)',
+                  }}
+                >
+                  {h.cta}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </div>
+            </motion.a>
+          );
+        })}
+      </div>
+
+      {/* La "cucitura tra biomi": segue il confine mentre le metà si espandono */}
+      <motion.div
+        aria-hidden="true"
+        className="biome-seam pointer-events-none absolute inset-y-0 hidden w-[2px] -translate-x-1/2 md:block"
+        initial={false}
+        animate={{ left: seamLeft }}
+        transition={spring}
+      />
+
+      {/* scrim superiore per il titolo-tesi */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-56 bg-gradient-to-b from-black/55 to-transparent" />
+
+      {/* Tesi centrale (H1) */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex flex-col items-center px-6 pt-14 text-center sm:pt-20">
+        <p className="eyebrow text-white/75">{headline.eyebrow}</p>
+        <h1 className="mt-3 font-display text-5xl font-semibold text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.55)] sm:text-6xl md:text-7xl">
+          {headline.title}
+        </h1>
+        <p className="mt-3 max-w-md text-sm text-white/85 sm:text-base">
+          {headline.subtitle}
+        </p>
+      </div>
+
+      {/* hint di scroll */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-4 z-20 flex justify-center">
+        <svg className="animate-hint text-white/55" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 5v14m0 0 6-6m-6 6-6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+    </section>
+  );
+}

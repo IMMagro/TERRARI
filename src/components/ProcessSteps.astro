@@ -1,0 +1,281 @@
+---
+import { Container, Mountain, Layers, Sprout, Droplets, Cpu } from 'lucide-react';
+
+const steps = [
+  { n: '01', phase: 'Fase 01', Icon: Container, t: 'Il Vetro Extra-Chiaro', d: 'Scelta e taglio del vessel in vetro ottico extra-chiaro con incollaggio invisibile a filo. La scenografia principale del bioma.', img: '/images/process-1.png', tag: 'Scenografia Principale', color: '#38bdf8' },
+  { n: '02', phase: 'Fase 02', Icon: Mountain, t: 'Drenaggio & Hardscape', d: 'Strato drenante ad alta porosità e struttura di rocce vulcaniche e legni ritorti: la geologia che regge l’ecosistema.', img: '/images/process-2.png', tag: 'Geologia & Struttura', color: '#10b981' },
+  { n: '03', phase: 'Fase 03', Icon: Layers, t: 'Substrati Biologici', d: 'Mix stratificati e calibrati sul bioma specifico: dal minerale arido all’humus umido ricco di elementi nutritivi.', img: '/images/process-3.png', tag: 'Nutrizione & Suolo', color: '#eab308' },
+  { n: '04', phase: 'Fase 04', Icon: Sprout, t: 'L’Impianto Botanico', d: 'Selezione rigorosa e messa a dimora delle specie vegetali, per compatibilità igrometrica e armonia scenografica.', img: '/images/process-4.png', tag: 'Flora & Estetica', color: '#22c55e' },
+  { n: '05', phase: 'Fase 05', Icon: Droplets, t: 'Sigillo & Ecoclima', d: 'Chiusura stagna del vassoio, prima nebulizzazione biologica e taratura millimetrica di umidità e temperatura.', img: '/images/process-5.png', tag: 'Equilibrio Idrico', color: '#06b6d4' },
+  { n: '06', phase: 'Fase 06', Icon: Cpu, t: 'Automazione Smart', d: 'Integrazione di luci LED solari, micro-nebulizzazione automatica e ventole su centralina intelligente autonoma.', img: '/images/process-6.png', tag: 'Microclima Autonomo', color: '#f59e0b' },
+];
+---
+
+<section id="processo" class="atmosphere relative border-t border-white/10 overflow-hidden bg-[#0b0f12] py-16 sm:py-24">
+  {/* Spotlight Radial Glow verde smeraldo che segue il mouse */}
+  <div
+    id="processo-spotlight"
+    class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 z-0"
+    style="background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(16, 185, 129, 0.12), rgba(34, 197, 94, 0.04) 40%, transparent 80%);"
+  >
+  </div>
+
+  {/* Griglia decorativa di sfondo */}
+  <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none"></div>
+
+  <div class="relative z-10 w-full px-5 sm:px-8 lg:px-12 xl:px-20">
+    
+    {/* HEADER PULITO CON PALLINI TIMELINE 01 - 06 E LA RANOCCHIA CHE SALTA */}
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+      
+      <div class="max-w-xl">
+        <h2 class="font-display text-4xl font-semibold text-white sm:text-5xl tracking-tight leading-tight">
+          Dal vetro all’ecosistema
+        </h2>
+        <p class="mt-3 text-base sm:text-lg text-white/70 leading-relaxed">
+          Ogni terrario prende vita attraverso sei fasi ingegnerizzate. Una sequenza rigorosa, studiata per ricreare le esatte dinamiche della natura.
+        </p>
+      </div>
+
+      {/* TIMELINE BAR CON LA RANOCCHIA MASCOTTE CHE SALTA */}
+      <div class="flex items-center">
+        <div id="timeline-container" class="relative inline-flex items-center gap-3 p-3 rounded-full bg-[#12181d]/90 border border-white/12 backdrop-blur-xl shadow-2xl">
+          
+          {steps.map((s, idx) => (
+            <button
+              data-step={idx}
+              class={`step-btn relative z-10 flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full text-xs sm:text-sm font-mono font-bold transition-all duration-500 ${
+                idx === 0
+                  ? 'btn-pulse bg-emerald-500 text-black shadow-[0_0_25px_rgba(16,185,129,0.8)] scale-110 ring-2 ring-emerald-400 ring-offset-2 ring-offset-[#0b0f12] animate-pulse'
+                  : 'bg-white/5 text-emerald-400 hover:bg-emerald-500/20 hover:text-white border border-white/10 hover:border-emerald-500/50 hover:scale-110'
+              }`}
+            >
+              {s.n}
+            </button>
+          ))}
+
+          {/* LA RANOCCHIA CHE SALTA SOPRA IL PULSANTE ATTIVO (Z-50) */}
+          <div
+            id="little-frog"
+            class="pointer-events-none absolute -top-10 z-50 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+            style="left: 0px; transform: translateX(14px);"
+          >
+            <div class="relative flex flex-col items-center animate-bounce">
+              {/* High-visibility Poison Dart Frog SVG */}
+              <svg width="36" height="32" viewBox="0 0 36 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="filter drop-shadow-[0_6px_16px_rgba(16,185,129,1)]">
+                <!-- Main Body -->
+                <ellipse cx="18" cy="20" rx="12" ry="9" fill="#10B981"/>
+                <ellipse cx="18" cy="22" rx="7.5" ry="5" fill="#A7F3D0"/>
+                <!-- Eyes -->
+                <circle cx="10" cy="11" r="5.5" fill="#10B981"/>
+                <circle cx="26" cy="11" r="5.5" fill="#10B981"/>
+                <circle cx="10" cy="10" r="3.5" fill="#F59E0B"/>
+                <circle cx="26" cy="10" r="3.5" fill="#F59E0B"/>
+                <circle cx="10" cy="10" r="1.8" fill="#000000"/>
+                <circle cx="26" cy="10" r="1.8" fill="#000000"/>
+                <circle cx="9" cy="9" r="0.9" fill="#FFFFFF"/>
+                <circle cx="25" cy="9" r="0.9" fill="#FFFFFF"/>
+                <!-- Cute Mouth & Cheeks -->
+                <path d="M14 22Q18 24 22 22" stroke="#065F46" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="11" cy="19" r="1.8" fill="#F43F5E" opacity="0.8"/>
+                <circle cx="25" cy="19" r="1.8" fill="#F43F5E" opacity="0.8"/>
+                <!-- Legs & Feet -->
+                <path d="M6 23C2 25 1 28 4 29C6 29 8 26 9 24" stroke="#047857" stroke-width="3" stroke-linecap="round"/>
+                <path d="M30 23C34 25 35 28 32 29C30 29 28 26 27 24" stroke="#047857" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+              {/* Frog Shadow */}
+              <div class="w-5 h-1.5 bg-emerald-400/60 rounded-full blur-[1px] -mt-1"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    {/* CONTAINER CONTENUTO PASSAGGI: ZERO ALTEZZA E ZERO SPAZIO VUOTO DI DEFAULT (SI ESPANDE IN HOVER) */}
+    <div
+      id="processo-content-wrapper"
+      class="max-h-0 opacity-0 overflow-hidden pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] w-full"
+    >
+      
+      {/* TRACK IN SCORRIMENTO ORIZZONTALE */}
+      <div
+        id="processo-track"
+        class="flex w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+        style="transform: translateX(0%);"
+      >
+        {steps.map((s, idx) => (
+          <div
+            class="w-full shrink-0 flex-none relative py-6 sm:py-10"
+          >
+            {/* IMMAGINE AMALGAMATA SULLA DESTRA SENZA BORDURE RIGIDE */}
+            <div
+              class="absolute inset-0 bg-cover bg-right-center opacity-45 pointer-events-none transition-all duration-700"
+              style={`background-image: url('${s.img}'); -webkit-mask-image: radial-gradient(circle at 75% 50%, black 15%, transparent 80%); mask-image: radial-gradient(circle at 75% 50%, black 15%, transparent 80%);`}
+            >
+            </div>
+
+            {/* GRADIENTE DI SFUMATURA SCURA INTEGRATO */}
+            <div class="absolute inset-0 bg-gradient-to-r from-[#0b0f12] via-[#0b0f12]/85 to-transparent pointer-events-none"></div>
+
+            {/* CONTENUTO IN PRIMO PIANO */}
+            <div class="relative z-20 max-w-2xl pr-4">
+              <div class="flex items-center gap-3 mb-5">
+                <span
+                  class="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-4 py-1.5 text-xs font-mono font-bold text-emerald-400 shadow-md backdrop-blur-md"
+                >
+                  {s.phase}
+                </span>
+                <span class="text-xs font-semibold uppercase tracking-wider text-emerald-300/80">
+                  {s.tag}
+                </span>
+              </div>
+
+              <h3 class="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-4 tracking-tight leading-tight">
+                {s.t}
+              </h3>
+
+              <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-xl">
+                {s.d}
+              </p>
+
+              <div class="mt-8 flex items-center gap-3 text-xs font-mono text-emerald-400/80">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                Fase {s.n} di 06 integrata nel processo produttivo
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Script interattivo: Ranocchia che salta sopra il tastino attivo e reset automatico al mouseleave
+  const buttons = document.querySelectorAll('.step-btn');
+  const wrapper = document.getElementById('processo-content-wrapper');
+  const track = document.getElementById('processo-track');
+  const frog = document.getElementById('little-frog');
+  const container = document.getElementById('timeline-container');
+  const section = document.getElementById('processo');
+  const spotlight = document.getElementById('processo-spotlight');
+
+  let isRevealed = false;
+
+  function moveFrogToButton(index: number) {
+    const button = buttons[index];
+    if (!frog || !container || !button) return;
+    const containerRect = container.getBoundingClientRect();
+    const btnRect = button.getBoundingClientRect();
+    const x = (btnRect.left - containerRect.left) + (btnRect.width / 2) - 18;
+    
+    frog.style.transform = `translateX(${x}px)`;
+  }
+
+  function activateStep(index: number) {
+    if (!isRevealed && wrapper) {
+      isRevealed = true;
+      wrapper.classList.remove('max-h-0', 'opacity-0', 'pointer-events-none');
+      wrapper.classList.add('max-h-[500px]', 'opacity-100', 'mt-8', 'pointer-events-auto', 'pt-6', 'border-t', 'border-white/10');
+    }
+
+    moveFrogToButton(index);
+
+    buttons.forEach((btn, idx) => {
+      btn.classList.remove('animate-pulse', 'btn-pulse');
+      if (idx === index) {
+        btn.classList.add('bg-emerald-500', 'text-black', 'shadow-lg', 'shadow-emerald-500/40', 'scale-110', 'ring-2', 'ring-emerald-400', 'ring-offset-2', 'ring-offset-[#0b0f12]');
+        btn.classList.remove('bg-white/5', 'text-emerald-400');
+      } else {
+        btn.classList.remove('bg-emerald-500', 'text-black', 'shadow-lg', 'shadow-emerald-500/40', 'scale-110', 'ring-2', 'ring-emerald-400', 'ring-offset-2', 'ring-offset-[#0b0f12]');
+        btn.classList.add('bg-white/5', 'text-emerald-400');
+      }
+    });
+
+    if (track) {
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }
+  }
+
+  function resetProcessSection() {
+    isRevealed = false;
+    if (wrapper) {
+      wrapper.classList.remove('max-h-[500px]', 'opacity-100', 'mt-8', 'pointer-events-auto', 'pt-6', 'border-t', 'border-white/10');
+      wrapper.classList.add('max-h-0', 'opacity-0', 'pointer-events-none');
+    }
+
+    buttons.forEach((btn, idx) => {
+      if (idx === 0) {
+        btn.classList.add('btn-pulse', 'bg-emerald-500', 'text-black', 'shadow-[0_0_25px_rgba(16,185,129,0.8)]', 'scale-110', 'ring-2', 'ring-emerald-400', 'ring-offset-2', 'ring-offset-[#0b0f12]', 'animate-pulse');
+        btn.classList.remove('bg-white/5', 'text-emerald-400');
+      } else {
+        btn.classList.remove('animate-pulse', 'btn-pulse', 'bg-emerald-500', 'text-black', 'shadow-lg', 'shadow-emerald-500/40', 'scale-110', 'ring-2', 'ring-emerald-400', 'ring-offset-2', 'ring-offset-[#0b0f12]');
+        btn.classList.add('bg-white/5', 'text-emerald-400');
+      }
+    });
+
+    moveFrogToButton(0);
+
+    if (track) {
+      track.style.transform = 'translateX(0%)';
+    }
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('mouseenter', () => {
+      const stepIdx = parseInt(btn.getAttribute('data-step') || '0', 10);
+      activateStep(stepIdx);
+    });
+
+    btn.addEventListener('click', () => {
+      const stepIdx = parseInt(btn.getAttribute('data-step') || '0', 10);
+      activateStep(stepIdx);
+    });
+  });
+
+  // Posizionamento iniziale ranocchia sul pulsante 01
+  window.addEventListener('load', () => {
+    moveFrogToButton(0);
+  });
+  setTimeout(() => {
+    moveFrogToButton(0);
+  }, 150);
+
+  window.addEventListener('resize', () => {
+    const activeBtn = document.querySelector('.step-btn.bg-emerald-500');
+    if (activeBtn) {
+      const stepIdx = parseInt(activeBtn.getAttribute('data-step') || '0', 10);
+      moveFrogToButton(stepIdx);
+    }
+  });
+
+  // Mouse leave reset della sezione
+  if (section) {
+    section.addEventListener('mouseleave', () => {
+      resetProcessSection();
+    });
+  }
+
+  // Spotlight mouse
+  if (section && spotlight) {
+    section.addEventListener('pointerenter', () => {
+      spotlight.style.opacity = '1';
+    });
+
+    section.addEventListener('pointerleave', () => {
+      spotlight.style.opacity = '0';
+    });
+
+    section.addEventListener('pointermove', (e) => {
+      const rect = section.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      section.style.setProperty('--mouse-x', `${x}px`);
+      section.style.setProperty('--mouse-y', `${y}px`);
+    });
+  }
+</script>

@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+/*
+  TERRARI — Dark Nature Premium design system
+  Soggetto: ecosistemi viventi sotto vetro (eredi delle Wardian case).
+  Il colore codifica il bioma: smeraldo = mondi umidi/lussureggianti,
+  ambra = mondi aridi/minerali. Il glassmorphism È il vetro del terrario.
+*/
+
+@theme {
+  /* --- Superfici (charcoal/slate) --- */
+  --color-bg: #0b0f12; /* brief: sfondo nativo dark */
+  --color-bg-deep: #070a0c;
+  --color-surface: #10161a;
+  --color-surface-2: #151d22;
+
+  /* --- Testo (near-white con leggera cast verde-fredda) --- */
+  --color-ink: #eaf1ed;
+  --color-ink-soft: #a9b7b0;
+  --color-ink-mute: #6e7d75;
+
+  /* --- Linee / bordi --- */
+  --color-line: #223028;
+  --color-line-soft: #1a2420;
+
+  /* --- Accento bioma umido: Tropical Emerald (brief) --- */
+  --color-tropic: #10b981;
+  --color-tropic-bright: #22c55e;
+
+  /* --- Accento bioma arido: Arid Amber (brief) --- */
+  --color-arid: #d97706;
+  --color-arid-bright: #eab308;
+
+  /* --- Tipografia --- */
+  --font-display: "Cormorant", Georgia, "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+:root {
+  /* Glow e vetro come variabili libere (usate nelle utility custom) */
+  --tropic-glow: rgba(34, 197, 94, 0.28);
+  --arid-glow: rgba(234, 179, 8, 0.24);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-highlight: rgba(255, 255, 255, 0.16);
+
+  /* Accento di default (bioma umido). Sovrascritto da [data-biome]. */
+  --accent: var(--color-tropic);
+  --accent-bright: var(--color-tropic-bright);
+  --accent-glow: var(--tropic-glow);
+
+  color-scheme: dark;
+}
+
+/* Il colore segue il bioma ovunque venga dichiarato data-biome */
+[data-biome="tropical"],
+[data-biome="paludarium"] {
+  --accent: var(--color-tropic);
+  --accent-bright: var(--color-tropic-bright);
+  --accent-glow: var(--tropic-glow);
+}
+[data-biome="desert"],
+[data-biome="wabi-kusa"] {
+  --accent: var(--color-arid);
+  --accent-bright: var(--color-arid-bright);
+  --accent-glow: var(--arid-glow);
+}
+
+/* ---------------------------------------------------------------- base */
+html {
+  scroll-behavior: smooth;
+  background: var(--color-bg-deep);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-tropic);
+  color: var(--color-bg-deep);
+}
+
+/* Focus visibile per la navigazione da tastiera (a11y) */
+:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Offset di scroll sotto l'header fisso */
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* ---------------------------------------------------------- tipografia */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Nomi botanici latini: corsivo, per convenzione tassonomica */
+.botanical {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Etichetta mono da erbario / laboratorio */
+.eyebrow {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.7rem;
+  color: var(--color-ink-soft);
+}
+
+/* Dato tecnico mono (badge spec) */
+.spec-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* ------------------------------------------------- vetrina / glass */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  border: 1px solid var(--glass-border);
+  /* Highlight sul bordo superiore = luce che rifrange sul vetro */
+  box-shadow:
+    inset 0 1px 0 0 var(--glass-highlight),
+    0 24px 60px -24px rgba(0, 0, 0, 0.7);
+}
+
+/* Fallback dove backdrop-filter non è supportato: vetro solido translucido */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: rgba(19, 27, 31, 0.9);
+  }
+}
+
+/* Hairline calda e sottile */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-line),
+    transparent
+  );
+}
+
+/* Atmosfera dark-nature senza immagini: due aloni bioma contrapposti */
+.atmosphere {
+  position: relative;
+  background:
+    radial-gradient(60% 55% at 15% 0%, rgba(16, 185, 129, 0.08), transparent 60%),
+    radial-gradient(55% 50% at 100% 100%, rgba(217, 119, 6, 0.07), transparent 55%),
+    var(--color-bg);
+}
+
+/* La "cucitura tra biomi": gradiente vivo smeraldo→ambra + filo di luce */
+.biome-seam {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-tropic) 20%,
+    var(--color-arid) 80%,
+    transparent
+  );
+  box-shadow: 0 0 24px 1px rgba(255, 255, 255, 0.12);
+}
+
+/* Placeholder gradiente per immagini mancanti (segue il bioma) */
+.img-placeholder {
+  background:
+    radial-gradient(120% 90% at 30% 15%, color-mix(in oklab, var(--accent) 42%, transparent), transparent 70%),
+    linear-gradient(160deg, var(--color-surface-2), var(--color-bg-deep));
+}
+
+/* -------------------------------------------------------- animazioni */
+@keyframes hint-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 0.3;
+  }
+}
+.animate-hint {
+  animation: hint-bounce 1.8s ease-in-out infinite;
+}
+
+@keyframes rise-fade {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.reveal {
+  animation: rise-fade 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Safety-net globale: rispetta prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

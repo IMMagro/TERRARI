@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import InquiryForm from '../components/react/InquiryForm.tsx';
+import { Mail, Clock, MapPin } from 'lucide-react';
+
+const canali = [
+  { Icon: Mail, t: 'Email', d: 'studio@terrari.example' },
+  { Icon: Clock, t: 'Risposta', d: 'Entro due giorni lavorativi' },
+  { Icon: MapPin, t: 'Studio', d: 'Su appuntamento, Italia' },
+];
+---
+
+<Base
+  title="Contatti — Terrari"
+  description="Parliamo del tuo progetto di terrario su misura. Scrivici: rispondiamo entro due giorni lavorativi con una prima proposta."
+>
+  <PageHero
+    eyebrow="Contatti"
+    title="Parliamo del tuo progetto"
+    intro="Una domanda, un’idea o un ambiente da riempire di verde: da qui parte tutto."
+    accent="arid"
+  />
+
+  <section class="atmosphere">
+    <div class="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1fr_1.2fr] lg:items-start">
+      <div>
+        <ul class="flex flex-col gap-6">
+          {canali.map(({ Icon, t, d }) => (
+            <li class="flex items-start gap-4">
+              <span
+                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-line/70"
+                style="color: var(--color-arid-bright);"
+              >
+                <Icon size={20} strokeWidth={1.5} />
+              </span>
+              <div>
+                <p class="eyebrow text-ink-mute">{t}</p>
+                <p class="mt-1 text-ink">{d}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-8 max-w-sm text-sm leading-relaxed text-ink-soft">
+          Preferisci il modulo? Scrivici a destra: raccogliamo i dettagli
+          essenziali per prepararti una prima proposta su misura.
+        </p>
+      </div>
+
+      <div>
+        <InquiryForm client:visible />
+      </div>
+    </div>
+  </section>
+</Base>

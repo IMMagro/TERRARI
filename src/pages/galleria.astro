@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import TerrarioCard from '../components/TerrarioCard.astro';
+
+const terrari = await getCollection('terrari');
+---
+
+<Base
+  title="Galleria — Terrari"
+  description="La collezione di terrari artigianali: mondi tropicali, desertici e paludari sotto vetro. Ogni pezzo con le sue specifiche tecniche."
+>
+  <PageHero
+    eyebrow="Galleria"
+    title="La collezione, per bioma"
+    intro="Ogni terrario è un microclima a sé. Qui trovi i progetti realizzati e disponibili — presto con filtri per bioma e configuratore integrato."
+  />
+
+  <section class="atmosphere">
+    <div class="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {terrari.map((t) => <TerrarioCard terrario={t} />)}
+      </div>
+
+      <p class="mt-12 text-center text-sm text-ink-mute">
+        In arrivo: filtri per bioma (Tropicale · Desertico · Paludario ·
+        Wabi-Kusa) e la scheda-configuratore per personalizzare ogni modello.
+      </p>
+    </div>
+  </section>
+</Base>

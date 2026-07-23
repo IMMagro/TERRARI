@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://terrari-showcase.vercel.app/sitemap-index.xml

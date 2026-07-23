@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { Sun, Droplets, Scissors } from 'lucide-react';
+
+const temi = [
+  {
+    Icon: Sun,
+    t: 'Luce',
+    d: 'Ogni bioma ha il suo fotoperiodo. Tropicali e paludari amano 10–12 ore di luce full-spectrum diffusa; gli aridi chiedono intensità maggiore e riposo notturno netto. Mai sole diretto sul vetro: diventa una serra.',
+  },
+  {
+    Icon: Droplets,
+    t: 'Umidità',
+    d: 'Nei chiusi tropicali la condensa è normale: arieggia se le pareti restano opache per giorni. Negli aridi si irriga poco e in profondità. Acqua demineralizzata per evitare aloni di calcare sul vetro.',
+  },
+  {
+    Icon: Scissors,
+    t: 'Manutenzione',
+    d: 'Pota per mantenere le proporzioni, rimuovi le foglie in decomposizione e controlla l’automazione una volta al mese. Un terrario ben avviato tende all’equilibrio: meno intervieni, meglio è.',
+  },
+];
+---
+
+<Base
+  title="Guida alla cura — Terrari"
+  description="Come si tiene vivo un terrario: luce, umidità e manutenzione spiegate per ogni bioma. La risorsa educativa dello studio."
+>
+  <PageHero
+    eyebrow="Cura"
+    title="Come si tiene vivo un ecosistema"
+    intro="Un terrario ben progettato lavora quasi da solo. Ecco i tre pilastri della cura — presto una guida approfondita per ogni bioma."
+  />
+
+  <section class="atmosphere">
+    <div class="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+      <div class="grid gap-6 md:grid-cols-3">
+        {temi.map(({ Icon, t, d }) => (
+          <article class="glass rounded-2xl p-7">
+            <span
+              class="flex h-12 w-12 items-center justify-center rounded-xl border border-line/70"
+              style="color: var(--color-tropic-bright);"
+            >
+              <Icon size={24} strokeWidth={1.4} />
+            </span>
+            <h2 class="mt-5 font-display text-2xl font-semibold text-ink">{t}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-ink-soft">{d}</p>
+          </article>
+        ))}
+      </div>
+
+      <p class="mt-12 text-center text-sm text-ink-mute">
+        In arrivo: schede di cura dettagliate per Tropicale, Desertico,
+        Paludario e Wabi-Kusa, con calendario stagionale.
+      </p>
+    </div>
+  </section>
+</Base>
