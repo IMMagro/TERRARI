@@ -71,5 +71,46 @@ const ogImageUrl = Astro.site ? new URL(ogImage, Astro.site).href : ogImage;
       <slot />
     </main>
     <Footer />
+
+    <script>
+      // Autoscroll dolce dopo 20s di inattività; qualsiasi interazione lo ferma e resetta.
+      (() => {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const IDLE_MS = 20000;
+        const SPEED = 1.1; // px per frame (~66px/s a 60fps): lento e dolce
+        let idleTimer: number | undefined;
+        let rafId: number | null = null;
+        let auto = false;
+
+        const atBottom = () =>
+          window.scrollY >= document.documentElement.scrollHeight - window.innerHeight - 1;
+
+        function stop() {
+          auto = false;
+          if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        }
+        function step() {
+          if (!auto) return;
+          if (atBottom()) { stop(); return; }
+          window.scrollBy({ top: SPEED, behavior: 'instant' as ScrollBehavior });
+          rafId = requestAnimationFrame(step);
+        }
+        function start() {
+          if (auto || atBottom()) return;
+          auto = true;
+          rafId = requestAnimationFrame(step);
+        }
+        function reset() {
+          stop();
+          clearTimeout(idleTimer);
+          idleTimer = window.setTimeout(start, IDLE_MS);
+        }
+        // Attività utente reale (NON lo scroll programmatico dell'autoscroll)
+        ['mousemove', 'mousedown', 'keydown', 'wheel', 'touchstart', 'pointerdown'].forEach((ev) =>
+          window.addEventListener(ev, reset, { passive: true }),
+        );
+        reset();
+      })();
+    </script>
   </body>
 </html>

@@ -98,7 +98,9 @@ const {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center bottom;
+    /* Geco spostato a destra: in idle non copre testo/CTA (che stanno a sinistra).
+       NB: con overflow orizzontale la % è "inversa" — valori bassi = soggetto più a destra. */
+    object-position: 30% bottom;
     pointer-events: none;
     user-select: none;
   }
