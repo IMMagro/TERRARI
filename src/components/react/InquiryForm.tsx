@@ -42,7 +42,7 @@ export default function InquiryForm() {
           Richiesta inviata
         </h3>
         <p className="mx-auto mt-2 max-w-sm text-sm text-ink-soft">
-          Grazie. Leggiamo ogni messaggio con cura e rispondiamo entro due
+          Grazie! Leggo ogni messaggio personalmente e ti rispondo entro due
           giorni lavorativi con una prima proposta.
         </p>
         <button
@@ -99,7 +99,7 @@ export default function InquiryForm() {
             autoComplete="email"
             disabled={busy}
             className="w-full rounded-lg border border-line bg-surface px-3.5 py-2.5 text-ink placeholder:text-ink-mute focus:border-tropic focus:outline-none focus:ring-2 focus:ring-tropic/30 disabled:opacity-50"
-            placeholder="dove ti scriviamo"
+            placeholder="dove ti rispondo"
           />
         </div>
       </div>
@@ -115,7 +115,7 @@ export default function InquiryForm() {
           rows={4}
           disabled={busy}
           className="w-full resize-y rounded-lg border border-line bg-surface px-3.5 py-2.5 text-ink placeholder:text-ink-mute focus:border-tropic focus:outline-none focus:ring-2 focus:ring-tropic/30 disabled:opacity-50"
-          placeholder="Bioma, spazio a disposizione, atmosfera che immagini…"
+          placeholder="Cosa ti serve (habitat completo, sfondo 3D, kit), misure della teca, atmosfera che immagini…"
         ></textarea>
       </div>
 
@@ -142,13 +142,13 @@ export default function InquiryForm() {
         ) : (
           <>
             <Send size={18} />
-            Richiedi il tuo terrario
+            Invia la richiesta
           </>
         )}
       </button>
 
       <p className="mt-3 text-xs text-ink-mute">
-        Nessuna newsletter, nessuno spam: usiamo i tuoi dati solo per risponderti.
+        Nessuna newsletter, nessuno spam: uso i tuoi dati solo per risponderti.
       </p>
     </form>
   );

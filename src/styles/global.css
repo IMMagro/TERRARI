@@ -259,3 +259,9 @@ html {
     scroll-behavior: auto !important;
   }
 }
+
+/* Evita lo scroll orizzontale su mobile (geco che sborda, elementi full-bleed). */
+html,
+body {
+  overflow-x: clip;
+}

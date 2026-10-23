@@ -4,37 +4,38 @@ import gecko from '../assets/gecko-peek.webp';
 import ProcessSteps from './ProcessSteps.astro';
 
 const obras = [
-  { cover: "/images/tropicale-cover.png", biome: "Bioma Tropicale", title: "Selva Sospesa", color: "#22c55e" },
-  { cover: "/images/paludario-cover.png", biome: "Bioma Paludario", title: "Sponda Emersa", color: "#10b981" },
-  { cover: "/images/deserto-cover.png",   biome: "Bioma Desertico",  title: "Meridiana Minerale", color: "#eab308" },
-  { cover: "/images/oasis-cover.png",     biome: "Bioma Ripario",    title: "Oasis Nera", color: "#14b8a6" },
-  { cover: "/images/tropicale-cover.png", biome: "Bioma Arido",      title: "Canyon di Quarzo", color: "#f59e0b" },
-  { cover: "/images/paludario-cover.png", biome: "Bioma Foresta",    title: "Ombra Primordiale", color: "#059669" },
+  { cover: "/images/muska/ft-cover.jpg", biome: "Floating Tree", title: "Vista frontale", color: "#22c55e" },
+  { cover: "/images/muska/ft-1.jpg", biome: "Floating Tree", title: "L'albero sospeso", color: "#10b981" },
+  { cover: "/images/muska/ft-2.jpg", biome: "Floating Tree", title: "Radici e muschio", color: "#eab308" },
+  { cover: "/images/muska/ft-3.jpg", biome: "Floating Tree", title: "Roccia scolpita a mano", color: "#94a3b8" },
+  { cover: "/images/muska/ft-4.jpg", biome: "Floating Tree", title: "Il letto di ciottoli", color: "#14b8a6" },
+  { cover: "/images/muska/ft-5.jpg", biome: "Floating Tree", title: "Luce della sera", color: "#f97316" },
+  { cover: "/images/muska/ft-6.jpg", biome: "Floating Tree", title: "Luce notturna", color: "#06b6d4" },
 ];
 
 const panels = [
   {
-    id: 'bioattivo',
-    badge: '🌿 Bioattivo 100%',
-    title: 'Ciclo Naturale Vivo',
-    desc: 'Ecosistema autosufficiente con substrati biologici vivi, flora tropicale e microfauna per l’equilibrio naturale del terreno.',
-    img: '/images/card-bioattivo.png',
-    color: '#22c55e'
+    id: 'sfondo',
+    badge: '🪨 Fatto a mano',
+    title: 'Sfondo 3D scolpito',
+    desc: 'Ogni sfondo è scolpito e dipinto a mano su misura della teca: rocce, cavità e ripiani dove fissare piante e legni. Nessuno sfondo di serie.',
+    img: '/images/muska/card-sfondo.jpg',
+    color: '#94a3b8'
   },
   {
-    id: 'vetro',
-    badge: '💎 Vetro Extra-Chiaro',
-    title: 'Trasparenza Cristallina',
-    desc: 'Vetro ottico extra-chiaro ad altissima trasmittanza con incollaggio invisibile a filo per una visione cristallina senza distorsioni.',
-    img: '/images/card-vetro.png',
+    id: 'cascata',
+    badge: '💧 Cascata',
+    title: 'Acqua a ricircolo',
+    desc: 'Una pompa nascosta riporta l’acqua in cima allo sfondo in un circuito chiuso. Sotto, uno strato drenante evita i ristagni.',
+    img: '/images/muska/card-cascata.jpg',
     color: '#38bdf8'
   },
   {
-    id: 'clima',
-    badge: '⚡ Microclima Smart',
-    title: 'Automazione Integrata',
-    desc: 'Centralina intelligente per la gestione automatizzata di nebulizzazione, ventilazione e fotoperiodo LED solare.',
-    img: '/images/card-clima.png',
+    id: 'smart',
+    badge: '⚡ Smart',
+    title: 'Luci e cascata dal telefono',
+    desc: 'Barra LED per le piante e cascata su presa smart: si accendono da sole agli orari che scegli e si regolano dall’app.',
+    img: '/images/muska/card-luci.jpg',
     color: '#eab308'
   }
 ];

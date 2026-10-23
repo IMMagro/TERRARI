@@ -3,31 +3,61 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import InquiryForm from '../components/react/InquiryForm.tsx';
 
+const offerte = [
+  {
+    t: 'Habitat completo',
+    d: 'Teca, sfondo 3D scolpito, cascata a ricircolo, luce e presa smart, legni, substrato e piante vive. Pronto da usare.',
+    note: 'Consegna a mano in Valdarno, Firenze e Arezzo',
+  },
+  {
+    t: 'Sfondo 3D su misura',
+    d: 'Solo lo sfondo, scolpito e dipinto a mano sulle misure della tua teca, con ripiani e cavità per piante e legni.',
+    note: 'Spedito in tutta Italia',
+  },
+  {
+    t: 'Kit fai-da-te',
+    d: 'Sfondo 3D, legni selezionati, muschio e una guida passo passo con le piante adatte. Lo monti tu.',
+    note: 'Spedito in tutta Italia',
+  },
+];
+
 const passi = [
-  { n: '01', t: 'Bioma', d: 'Tropicale, desertico, paludario o wabi-kusa.' },
-  { n: '02', t: 'Dimensioni', d: 'Spazio a disposizione e formato del vetro.' },
-  { n: '03', t: 'Equipaggiamento', d: 'Illuminazione smart, nebulizzazione, setup bioattivo.' },
-  { n: '04', t: 'Contatti', d: 'Ti ricontattiamo con una proposta su misura.' },
+  { n: '01', t: 'Mi racconti cosa ti serve', d: 'Habitat completo, sfondo o kit, misure della teca e atmosfera che hai in mente.' },
+  { n: '02', t: 'Ti mando una proposta', d: 'Entro due giorni lavorativi: idea, materiali e prezzo preciso.' },
+  { n: '03', t: 'Costruisco e ti aggiorno', d: 'Ti mando foto e video mentre lo sfondo prende forma.' },
+  { n: '04', t: 'Consegna', d: 'A mano in zona, oppure spedizione per sfondi e kit. Ti spiego come gestirlo.' },
 ];
 ---
 
 <Base
-  title="Su misura — Terrari"
-  description="Configura il tuo terrario su misura: bioma, dimensioni, automazione. Progettiamo un microclima autonomo e ti rispondiamo con una proposta."
+  title="Su misura — Muska Habitat"
+  description="Habitat completi, sfondi 3D su misura e kit fai-da-te per terrari bioattivi, costruiti a mano a San Giovanni Valdarno. Richiedi un preventivo."
 >
   <PageHero
     eyebrow="Su misura"
-    title="Configura il tuo terrario"
-    intro="Il configuratore passo-passo è in arrivo. Nel frattempo raccontaci il progetto: leggiamo ogni richiesta e rispondiamo con una prima proposta."
+    title="Il tuo habitat, fatto a mano"
+    intro="Tre modi per lavorare insieme. Scrivimi cosa ti serve e ti rispondo con una proposta e un prezzo preciso, senza impegno."
     accent="arid"
   />
 
   <section class="atmosphere">
+    <div class="mx-auto max-w-6xl px-5 pt-16 sm:px-8 sm:pt-20">
+      <div class="grid gap-6 md:grid-cols-3">
+        {offerte.map((o) => (
+          <article class="glass flex flex-col gap-3 rounded-2xl p-7">
+            <h2 class="font-display text-2xl font-semibold text-ink">{o.t}</h2>
+            <p class="text-sm leading-relaxed text-ink-soft">{o.d}</p>
+            <p class="mt-auto pt-2 text-xs text-ink-mute">{o.note}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+
     <div class="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-2 lg:items-start">
       <div>
-        <p class="eyebrow" style="color: var(--color-arid-bright);">Come funzionerà</p>
+        <p class="eyebrow" style="color: var(--color-arid-bright);">Come funziona</p>
         <h2 class="mt-3 font-display text-3xl font-semibold text-ink sm:text-4xl">
-          Quattro passi, un ecosistema
+          Quattro passi, un habitat
         </h2>
         <ol class="mt-8 flex flex-col gap-6">
           {passi.map((p) => (
@@ -41,7 +71,6 @@ const passi = [
           ))}
         </ol>
       </div>
-
       <div>
         <InquiryForm client:visible />
       </div>

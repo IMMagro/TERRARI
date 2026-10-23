@@ -49,7 +49,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const key = import.meta.env.RESEND_API_KEY;
-  const to = import.meta.env.CONTACT_TO_EMAIL || 'studio@terrari.example';
+  const to = import.meta.env.CONTACT_TO_EMAIL || 'muskahabitat@gmail.com';
 
   // Fallback di sviluppo: senza chiave non invia, logga soltanto.
   if (!key) {
@@ -76,7 +76,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const { error } = await resend.emails.send({
       // TODO: sostituire con un mittente su dominio verificato al deploy.
-      from: 'Terrari <onboarding@resend.dev>',
+      from: 'Muska Habitat <onboarding@resend.dev>',
       to: [to],
       replyTo: email,
       subject: `Nuova richiesta di preventivo — ${nome}`,
