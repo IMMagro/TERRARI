@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="7" fill="#0B0F12"/>
-  <path d="M16 6c-4.4 0-7.5 3.3-7.5 7.6 0 3 1.7 5.6 4.3 6.9v2.5h6.4v-2.5c2.6-1.3 4.3-3.9 4.3-6.9C23.5 9.3 20.4 6 16 6Z" stroke="#22C55E" stroke-width="1.3" opacity="0.55" fill="none"/>
-  <path d="M16 22v-9m0 0c0-1.9 1.4-3.4 3.5-3.7-.2 2.1-1.6 3.5-3.5 3.7Zm0 1.6c0-1.7-1.3-3-3.3-3.3.2 2 1.5 3.1 3.3 3.3Z" stroke="#22C55E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><title>Muska Habitat</title><g transform="translate(-23.3 -23.3) scale(1.182)"><path fill="#232A27" d="M68 24 H188 A44 44 0 0 1 232 68 V188 A44 44 0 0 1 188 232 H68 A44 44 0 0 1 24 188 V68 A44 44 0 0 1 68 24 Z"/><path fill="#9BC25A" fill-rule="evenodd" d="M62 146 V114 A38 38 0 0 1 128.0 86.29 A38 38 0 0 1 194 114 V146 Z M90 146 V114 A12.0 12.0 0 0 1 114 114 V146 Z M142 146 V114 A12.0 12.0 0 0 1 166 114 V146 Z"/><path fill="#A9B0A8" d="M48 162 H208 V184 H48 Z"/></g></svg>
