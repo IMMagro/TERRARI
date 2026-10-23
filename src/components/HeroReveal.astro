@@ -6,8 +6,8 @@
 //   Su mobile → passata automatica. Nessuna isola React: vanilla JS + CSS mask + canvas.
 // - Rispetta prefers-reduced-motion.
 // Morph via astro:assets: content-hashed (cache-safe in produzione, freschi in dev).
-import ambraImg from '../assets/muska/hero-giorno.webp';
-import biancoImg from '../assets/muska/hero-notte.webp';
+import ambraImg from '../assets/hero/gecko-ambra.webp';
+import biancoImg from '../assets/hero/gecko-bianco.webp';
 
 interface Props {
   base?: string; // immagine "sopra" (morph ambra / arido)
@@ -20,8 +20,8 @@ const {
   base = ambraImg.src,
   reveal = biancoImg.src,
   eyebrow = 'Muska Habitat · San Giovanni Valdarno',
-  baseAlt = 'Floating Tree alla luce del giorno: radici, muschio e roccia scolpita',
-  revealAlt = 'Lo stesso terrario con una luce notturna'
+  baseAlt = 'Geco crestato, morph ambra',
+  revealAlt = 'Geco crestato, morph perla',
 } = Astro.props;
 ---
 
@@ -41,7 +41,7 @@ const {
         <h1 class="title">Un vetro,<br /><em>due mondi.</em></h1>
         <p class="lede">
           Terrari bioattivi costruiti a mano: sfondo 3D scolpito, cascata a ricircolo,
-          luci e acqua che si accendono da sole. Passa sul terrario e guardalo di notte.
+          luci e acqua che si accendono da sole. Passa sul geco: ogni terrario custodisce più di quanto mostri.
         </p>
         <div class="cta">
           <a class="btn btn--primary" href="/custom">Richiedi un preventivo</a>
@@ -52,7 +52,7 @@ const {
 
     <footer class="hero__bottom">
       <div class="scroll">scorri <b>↓</b></div>
-      <div class="hint" id="hero-hint"><span class="dot pulse"></span>muovi il mouse sul terrario</div>
+      <div class="hint" id="hero-hint"><span class="dot pulse"></span>muovi il mouse sul geco</div>
     </footer>
   </div>
 
