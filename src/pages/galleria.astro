@@ -1,32 +1,121 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import TerrarioCard from '../components/TerrarioCard.astro';
+import { resolveTerrarioImage } from '../lib/images';
+import { biomeLabel } from '../lib/biomi';
 
 const terrari = await getCollection('terrari');
+const lavori = await Promise.all(
+  terrari.map(async (t) => {
+    const { Content } = await render(t);
+    return {
+      t,
+      Content,
+      cover: resolveTerrarioImage(t.data.coverImage),
+      gallery: t.data.galleryImages
+        .map((g) => resolveTerrarioImage(g))
+        .filter((g): g is NonNullable<typeof g> => Boolean(g)),
+    };
+  }),
+);
+
+const specLabels: [keyof (typeof terrari)[number]['data']['specs'], string][] = [
+  ['dimensions', 'Dimensioni'],
+  ['volume', 'Volume'],
+  ['glassType', 'Teca'],
+  ['hardscape', 'Sfondo e arredo'],
+  ['automation', 'Automazione'],
+  ['lighting', 'Luce'],
+  ['substrate', 'Substrato'],
+  ['maintenanceLevel', 'Manutenzione'],
+];
 ---
 
 <Base
-  title="Galleria — Terrari"
-  description="La collezione di terrari artigianali: mondi tropicali, desertici e paludari sotto vetro. Ogni pezzo con le sue specifiche tecniche."
+  title="Lavori — Muska Habitat"
+  description="I terrari costruiti a mano da Muska Habitat: foto reali, materiali e tecnica di ogni lavoro. Sfondi 3D scolpiti, cascate a ricircolo e automazione smart."
 >
   <PageHero
-    eyebrow="Galleria"
-    title="La collezione, per bioma"
-    intro="Ogni terrario è un microclima a sé. Qui trovi i progetti realizzati e disponibili — presto con filtri per bioma e configuratore integrato."
+    eyebrow="Lavori"
+    title="Fatti a mano, uno alla volta"
+    intro="Qui trovi solo lavori veri, fotografati come sono. Ogni habitat è un pezzo unico: se ti piace uno stile, posso costruirne uno simile su misura per te."
   />
 
   <section class="atmosphere">
-    <div class="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {terrari.map((t) => <TerrarioCard terrario={t} />)}
-      </div>
+    <div class="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 flex flex-col gap-24">
+      {lavori.map(({ t, Content, cover, gallery }) => (
+        <article class="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-start" data-biome={t.data.biome}>
+          <div class="flex flex-col gap-3">
+            {cover && (
+              <Image
+                src={cover}
+                alt={`${t.data.title}: vista frontale del terrario`}
+                widths={[480, 800, 1100]}
+                sizes="(max-width: 1024px) 92vw, 600px"
+                class="w-full rounded-2xl object-cover"
+              />
+            )}
+            <div class="grid grid-cols-3 gap-3">
+              {gallery.map((g, i) => (
+                <Image
+                  src={g}
+                  alt={`${t.data.title}: dettaglio ${i + 1}`}
+                  widths={[240, 400]}
+                  sizes="(max-width: 1024px) 30vw, 190px"
+                  class="aspect-[3/4] w-full rounded-xl object-cover"
+                />
+              ))}
+            </div>
+          </div>
 
-      <p class="mt-12 text-center text-sm text-ink-mute">
-        In arrivo: filtri per bioma (Tropicale · Desertico · Paludario ·
-        Wabi-Kusa) e la scheda-configuratore per personalizzare ogni modello.
+          <div class="flex flex-col gap-6">
+            <div>
+              <p class="eyebrow" style="color: var(--color-tropic-bright);">
+                {biomeLabel(t.data.biome)} · {t.data.status}
+              </p>
+              <h2 class="mt-2 font-display text-4xl font-semibold text-ink sm:text-5xl">{t.data.title}</h2>
+              <p class="mt-3 text-lg leading-relaxed text-ink-soft">{t.data.tagline}</p>
+            </div>
+
+            <div class="prose-muska flex flex-col gap-4 text-sm leading-relaxed text-ink-soft">
+              <Content />
+            </div>
+
+            <dl class="glass grid gap-x-6 gap-y-4 rounded-2xl p-6 text-sm sm:grid-cols-2">
+              {specLabels.map(([k, label]) => (
+                <div>
+                  <dt class="text-xs text-ink-mute">{label}</dt>
+                  <dd class="mt-0.5 text-ink">{t.data.specs[k]}</dd>
+                </div>
+              ))}
+            </dl>
+
+            {t.data.status === 'Disponibile' && (
+              <div class="flex flex-wrap gap-3">
+                <a href="/contatti" class="rounded-full border border-tropic/40 bg-tropic/15 px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-tropic/30">
+                  Chiedi informazioni
+                </a>
+                <a href="/custom" class="rounded-full border border-line/70 px-5 py-2.5 text-sm text-ink-soft transition-colors hover:text-white">
+                  Ne voglio uno simile →
+                </a>
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+
+      <p class="text-center text-sm text-ink-mute">
+        Nuovi lavori in arrivo. Per vederli mentre li costruisco, seguimi su Instagram
+        <a class="text-ink-soft underline-offset-4 hover:underline" href="https://www.instagram.com/muska.habitat/" target="_blank" rel="noopener">@muska.habitat</a>.
       </p>
     </div>
   </section>
 </Base>
+
+<style>
+  .prose-muska :global(p) {
+    margin: 0;
+  }
+</style>

@@ -2,18 +2,19 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import InquiryForm from '../components/react/InquiryForm.tsx';
-import { Mail, Clock, MapPin } from 'lucide-react';
+import { Mail, Clock, MapPin, AtSign } from 'lucide-react';
 
 const canali = [
-  { Icon: Mail, t: 'Email', d: 'studio@terrari.example' },
+  { Icon: Mail, t: 'Email', d: 'muskahabitat@gmail.com' },
   { Icon: Clock, t: 'Risposta', d: 'Entro due giorni lavorativi' },
-  { Icon: MapPin, t: 'Studio', d: 'Su appuntamento, Italia' },
+  { Icon: MapPin, t: 'Laboratorio', d: 'San Giovanni Valdarno (AR), su appuntamento' },
+  { Icon: AtSign, t: 'Instagram e TikTok', d: '@muska.habitat' },
 ];
 ---
 
 <Base
-  title="Contatti — Terrari"
-  description="Parliamo del tuo progetto di terrario su misura. Scrivici: rispondiamo entro due giorni lavorativi con una prima proposta."
+  title="Contatti — Muska Habitat"
+  description="Scrivimi per un habitat su misura, uno sfondo 3D o un kit. Rispondo entro due giorni lavorativi con una prima proposta."
 >
   <PageHero
     eyebrow="Contatti"
@@ -42,8 +43,8 @@ const canali = [
           ))}
         </ul>
         <p class="mt-8 max-w-sm text-sm leading-relaxed text-ink-soft">
-          Preferisci il modulo? Scrivici a destra: raccogliamo i dettagli
-          essenziali per prepararti una prima proposta su misura.
+          Preferisci il modulo? Scrivimi qui accanto: con pochi dettagli
+          ti preparo una prima proposta su misura.
         </p>
       </div>
 

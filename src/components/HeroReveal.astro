@@ -6,8 +6,8 @@
 //   Su mobile → passata automatica. Nessuna isola React: vanilla JS + CSS mask + canvas.
 // - Rispetta prefers-reduced-motion.
 // Morph via astro:assets: content-hashed (cache-safe in produzione, freschi in dev).
-import ambraImg from '../assets/hero/gecko-ambra.webp';
-import biancoImg from '../assets/hero/gecko-bianco.webp';
+import ambraImg from '../assets/muska/hero-giorno.webp';
+import biancoImg from '../assets/muska/hero-notte.webp';
 
 interface Props {
   base?: string; // immagine "sopra" (morph ambra / arido)
@@ -19,9 +19,9 @@ interface Props {
 const {
   base = ambraImg.src,
   reveal = biancoImg.src,
-  eyebrow = 'Atelier · Terrari su misura',
-  baseAlt = 'Geco crestato, morph ambra',
-  revealAlt = 'Geco crestato, morph perla',
+  eyebrow = 'Muska Habitat · San Giovanni Valdarno',
+  baseAlt = 'Floating Tree alla luce del giorno: radici, muschio e roccia scolpita',
+  revealAlt = 'Lo stesso terrario con una luce notturna'
 } = Astro.props;
 ---
 
@@ -40,19 +40,19 @@ const {
         <p class="eyebrow">{eyebrow}</p>
         <h1 class="title">Un vetro,<br /><em>due mondi.</em></h1>
         <p class="lede">
-          Ecosistemi viventi costruiti a mano, calibrati sulla specie e sullo spazio.
-          Passa sul geco: ogni terrario custodisce più di quanto mostri.
+          Terrari bioattivi costruiti a mano: sfondo 3D scolpito, cascata a ricircolo,
+          luci e acqua che si accendono da sole. Passa sul terrario e guardalo di notte.
         </p>
         <div class="cta">
-          <a class="btn btn--primary" href="/custom">Configura il tuo terrario</a>
-          <a class="btn btn--ghost" href="/galleria">Esplora la galleria&nbsp;→</a>
+          <a class="btn btn--primary" href="/custom">Richiedi un preventivo</a>
+          <a class="btn btn--ghost" href="/galleria">Guarda i lavori&nbsp;→</a>
         </div>
       </div>
     </div>
 
     <footer class="hero__bottom">
       <div class="scroll">scorri <b>↓</b></div>
-      <div class="hint" id="hero-hint"><span class="dot pulse"></span>muovi il mouse sul geco</div>
+      <div class="hint" id="hero-hint"><span class="dot pulse"></span>muovi il mouse sul terrario</div>
     </footer>
   </div>
 
