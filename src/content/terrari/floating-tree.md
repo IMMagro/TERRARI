@@ -7,12 +7,12 @@ tagline: Un albero sospeso sulla roccia scolpita a mano, con una cascata che si 
 isFeatured: true
 coverImage: ft-cover.webp
 galleryImages:
+  - ft-7.webp
+  - ft-9.webp
+  - ft-8.webp
+  - ft-10.webp
   - ft-1.webp
-  - ft-2.webp
   - ft-3.webp
-  - ft-4.webp
-  - ft-5.webp
-  - ft-6.webp
 specs:
   dimensions: 40 × 40 × 60 cm
   volume: "~96 L"
@@ -20,9 +20,12 @@ specs:
   lighting: Barra LED per piante, multicolore, collegata a presa smart
   automation: Cascata con pompa a ricircolo e luce programmabili dall'app del telefono
   hardscape: Sfondo 3D scolpito e dipinto a mano, radici e legni naturali, ciottoli di fiume
-  substrate: Strato drenante, substrato tropicale, muschio vivo
+  substrate: Strato drenante, substrato tropicale, piante tropicali vive e muschio
   maintenanceLevel: Medio
 botanicalList:
+  - Piante a foglia rigata
+  - Rampicanti
+  - Felci
   - Muschio vivo
 status: Disponibile
 ---
@@ -38,4 +41,4 @@ crescere le piante e cambia colore, così di giorno l'habitat ha una luce
 naturale e di sera prende un'atmosfera diversa.
 
 Sotto c'è uno strato drenante che evita i ristagni, poi il substrato tropicale e
-il muschio vivo. È già collaudato e funzionante.
+le piante vive: foglie rigate, rampicanti, felci e muschio. È già collaudato e funzionante: nelle foto ci vive il mio geco ciliatus, che non è incluso.
